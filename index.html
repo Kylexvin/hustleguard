@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HustleGuard — shop intelligence from anywhere. Track sales, stock and profit with smart alerts and AI-powered business insights.">
+  <title>HustleGuard — Shop Intelligence. From Anywhere.</title>
+  <style>
+    :root{
+      --bg:#07110d; --surface:#0c1914; --surface2:#10221a; --line:#1d3429;
+      --text:#102018; --muted:#5d7066; --accent:#1f9d55; --accent2:#176b3b;
+      --dark:#ffffff; --max:1180px; --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.90);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px}
+    .brand-mark{width:38px;height:38px;border-radius:11px;background:var(--accent);color:var(--dark);display:grid;place-items:center;font-weight:950}
+    .nav-links{display:flex;gap:28px;color:var(--muted);font-size:14px}
+    .nav-links a:hover{color:var(--text)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:12px;padding:12px 18px;font-weight:750;cursor:pointer;transition:.2s}
+    .btn-primary{background:var(--accent);color:var(--dark)}
+    .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.04)}
+    .btn-ghost{border-color:#294438;color:var(--text);background:rgba(255,255,255,.02)}
+    .btn-ghost:hover{background:rgba(255,255,255,.06)}
+    .hero{padding:94px 0 70px;position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;width:650px;height:650px;right:-260px;top:-260px;background:radial-gradient(circle,rgba(85,229,139,.17),transparent 65%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:62px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent2);font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+    h1{font-size:clamp(48px,7vw,82px);line-height:.98;letter-spacing:-.055em;margin:18px 0 24px}
+    h1 span{color:var(--accent)}
+    .lead{font-size:19px;color:var(--muted);max-width:640px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 22px}
+    .trust{font-size:13px;color:#6b7d73}
+    .dashboard{background:linear-gradient(145deg,#f7fcf9,#edf7f0);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:0 20px 60px rgba(25,70,45,.12)}
+    .dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .dash-title{font-weight:800}
+    .pill{font-size:11px;color:var(--accent2);background:#dff4e7;padding:5px 9px;border-radius:99px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .stat{background:rgba(20,60,35,.035);border:1px solid #1c3328;border-radius:16px;padding:15px}
+    .stat small{color:#6b7d73}.stat strong{display:block;font-size:24px;margin-top:5px}
+    .chart{margin-top:12px;height:170px;border-radius:18px;border:1px solid #1c3328;background:linear-gradient(180deg,rgba(85,229,139,.07),transparent);position:relative;overflow:hidden}
+    .chart svg{width:100%;height:100%}
+    .alerts{display:grid;gap:9px;margin-top:12px}
+    .alert{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;background:#f4faf6;border:1px solid #1b3026;border-radius:13px;font-size:12px}
+    .alert-icon{width:27px;height:27px;border-radius:9px;background:#dff4e7;display:grid;place-items:center;color:var(--accent)}
+    section{padding:92px 0}
+    .section-head{max-width:720px;margin-bottom:42px}
+    .section-head h2{font-size:clamp(34px,4.5vw,55px);line-height:1.05;letter-spacing:-.04em;margin:10px 0 15px}
+    .section-head p{color:var(--muted);font-size:17px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:25px}
+    .card:hover{border-color:#315441}
+    .icon{font-size:24px;margin-bottom:18px}
+    .card h3{margin:0 0 8px;font-size:19px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .dark-band{background:#f5faf7;border-top:1px solid #dbe8df;border-bottom:1px solid #dbe8df}
+    .pos{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+    .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:25px}
+    .flow-box{padding:14px 17px;border:1px solid #294438;background:#edf8f1;border-radius:13px;font-weight:750}
+    .arrow{color:var(--accent);font-weight:900}
+    .feature-list{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:25px}
+    .check{display:flex;gap:9px;color:#40554a;font-size:14px}.check b{color:var(--accent)}
+    .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .step{position:relative;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:18px}
+    .num{font-size:12px;color:var(--accent);font-weight:900}
+    .step h3{margin:20px 0 7px}.step p{color:var(--muted);font-size:13px;margin:0}
+    .ai-box{display:grid;grid-template-columns:.85fr 1.15fr;gap:45px;align-items:center}
+    .quote-list{display:grid;gap:10px}
+    .quote{padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:15px;color:#30463a}
+    .quote:before{content:"AI";display:inline-grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#dff4e7;color:var(--accent);font-size:10px;font-weight:900;margin-right:10px}
+    .audience{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .audience .card{min-height:185px}
+    .cta{padding:90px 0}
+    .cta-box{border:1px solid #2a5039;border-radius:28px;padding:58px;text-align:center;background:radial-gradient(circle at 50% 0,rgba(85,229,139,.13),transparent 55%),#0b1912}
+    .cta h2{font-size:clamp(35px,5vw,58px);line-height:1;margin:0 0 15px;letter-spacing:-.04em}
+    .cta p{color:var(--muted);max-width:620px;margin:0 auto 25px}
+    footer{border-top:1px solid #dbe8df;padding:35px 0 45px;color:#6b7d73}
+    .footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .footer-brand{color:var(--text);font-weight:800}
+    @media(max-width:900px){
+      .hero-grid,.pos,.ai-box{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr 1fr}
+      .grid-5,.steps{grid-template-columns:1fr 1fr}
+      .nav-links{display:none}
+    }
+    @media(max-width:600px){
+      .container{width:min(100% - 28px,1180px)}
+      .hero{padding-top:65px}
+      h1{font-size:50px}
+      section{padding:68px 0}
+      .grid-3,.grid-5,.steps,.audience,.feature-list{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .cta-box{padding:38px 22px}
+      .footer-row{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#"><span class="brand-mark">H</span>HustleGuard</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#intelligence">Intelligence</a>
+        <a href="#remote">Remote Monitoring</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <a class="btn btn-primary" href="#get-started">Get Started</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Built for Kenyan businesses</div>
+          <h1>Know what's happening in your shop <span>from anywhere.</span></h1>
+          <p class="lead">HustleGuard turns your shop data into simple insights, smart alerts and practical recommendations. Track sales, stock and profit — then understand what needs your attention next.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#get-started">Get Started →</a>
+            <a class="btn btn-ghost" href="#how">See How It Works</a>
+          </div>
+          <div class="trust">A product of JReed Tech Group · Shop intelligence. From anywhere.</div>
+        </div>
+
+        <div class="dashboard" aria-label="HustleGuard dashboard preview">
+          <div class="dash-top"><div class="dash-title">Business Overview</div><div class="pill">● Live insights</div></div>
+          <div class="stats">
+            <div class="stat"><small>Sales today</small><strong>KSh 48.2K</strong></div>
+            <div class="stat"><small>Gross profit</small><strong>KSh 12.7K</strong></div>
+            <div class="stat"><small>Low stock</small><strong>7 items</strong></div>
+          </div>
+          <div class="chart">
+            <svg viewBox="0 0 600 180" preserveAspectRatio="none">
+              <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#55e58b" stop-opacity=".28"/><stop offset="1" stop-color="#55e58b" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0 145 C45 138 58 105 100 117 S160 138 200 92 S260 106 300 76 S360 95 405 55 S470 90 520 48 S560 61 600 25 V180 H0Z" fill="url(#fill)"/>
+              <path d="M0 145 C45 138 58 105 100 117 S160 138 200 92 S260 106 300 76 S360 95 405 55 S470 90 520 48 S560 61 600 25" fill="none" stroke="#55e58b" stroke-width="4"/>
+            </svg>
+          </div>
+          <div class="alerts">
+            <div class="alert"><span class="alert-icon">!</span><div><b>Stock alert</b><br>Cooking oil may run out in 4 days.</div></div>
+            <div class="alert"><span class="alert-icon">↗</span><div><b>Sales insight</b><br>Soft drink sales are up 18% over 14 days.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">One simple view</div>
+          <h2>Your business, without the guesswork.</h2>
+          <p>HustleGuard brings the information that matters together so you can see what is happening, understand changes and know where to look next.</p>
+        </div>
+        <div class="grid-5">
+          <div class="card"><div class="icon">📊</div><h3>Sales</h3><p>Understand what you're selling and how sales are changing.</p></div>
+          <div class="card"><div class="icon">📦</div><h3>Stock</h3><p>See what's available, running low or sitting too long.</p></div>
+          <div class="card"><div class="icon">💰</div><h3>Profit</h3><p>Turn sales and stock information into clearer business performance.</p></div>
+          <div class="card"><div class="icon">🚨</div><h3>Alerts</h3><p>Get notified when something important needs attention.</p></div>
+          <div class="card"><div class="icon">💡</div><h3>Insights</h3><p>Move beyond numbers and understand what the data may mean.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-band">
+      <div class="container pos">
+        <div>
+          <div class="eyebrow">Already have a POS?</div>
+          <h2>Keep your POS. Upgrade your visibility.</h2>
+          <p class="lead">You don't have to replace the system you already use. Where supported, HustleGuard can work alongside existing POS data to add monitoring, forecasting and business intelligence.</p>
+          <div class="flow"><span class="flow-box">Your POS</span><span class="arrow">→</span><span class="flow-box">HustleGuard</span><span class="arrow">→</span><span class="flow-box">Business Intelligence</span></div>
+        </div>
+        <div class="card">
+          <h3>Work toward smarter operations</h3>
+          <div class="feature-list">
+            <div class="check"><b>✓</b> Sales monitoring</div><div class="check"><b>✓</b> Demand forecasting</div>
+            <div class="check"><b>✓</b> Smart alerts</div><div class="check"><b>✓</b> AI recommendations</div>
+            <div class="check"><b>✓</b> Inventory insights</div><div class="check"><b>✓</b> Profit visibility</div>
+            <div class="check"><b>✓</b> Remote monitoring</div><div class="check"><b>✓</b> Business trends</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">From tracking to intelligence</div>
+          <h2>Start with the basics. Go further with data.</h2>
+          <p>The goal isn't to give you more numbers. It's to help you understand your business.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="num">01 · TRACK</div><h3>Record</h3><p>Capture sales, products, prices and stock.</p></div>
+          <div class="step"><div class="num">02 · MONITOR</div><h3>See</h3><p>Keep an eye on what is happening in your business.</p></div>
+          <div class="step"><div class="num">03 · UNDERSTAND</div><h3>Identify</h3><p>Spot trends, changes and potential problems.</p></div>
+          <div class="step"><div class="num">04 · PREDICT</div><h3>Anticipate</h3><p>Use business data to forecast sales and demand.</p></div>
+          <div class="step"><div class="num">05 · ACT</div><h3>Decide</h3><p>Get practical recommendations based on what is happening.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="intelligence" class="dark-band">
+      <div class="container ai-box">
+        <div>
+          <div class="eyebrow">AI business assistant</div>
+          <h2>Let your business data work for you.</h2>
+          <p class="lead">HustleGuard is designed to go beyond traditional shop-management software by helping identify patterns and turn them into useful information.</p>
+        </div>
+        <div class="quote-list">
+          <div class="quote">Sales of this product have been increasing over the last 14 days.</div>
+          <div class="quote">This product may run out soon based on your recent sales.</div>
+          <div class="quote">This product is moving slowly and may become dead stock.</div>
+          <div class="quote">Your sales are trending differently from your usual pattern.</div>
+          <div class="quote">You may need to review this product's price.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="remote">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Built for owners who can't always be there</div>
+          <h2>Your shop can be physical. Your business intelligence doesn't have to be.</h2>
+          <p>Whether you're working in Nairobi while your shop is elsewhere, managing multiple businesses, working a full-time job or living abroad, HustleGuard is designed to give you a digital view of your business.</p>
+        </div>
+        <div class="audience">
+          <div class="card"><div class="icon">🌍</div><h3>Manage from anywhere</h3><p>Stay informed when you can't be physically present every day.</p></div>
+          <div class="card"><div class="icon">🏪</div><h3>Run a growing shop</h3><p>Start simple and build a stronger information system as your business grows.</p></div>
+          <div class="card"><div class="icon">📱</div><h3>Stay connected</h3><p>Bring important business signals into one digital view.</p></div>
+          <div class="card"><div class="icon">🇰🇪</div><h3>Built for Kenya</h3><p>Designed around making business intelligence more accessible to Kenyan businesses.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-band">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">What HustleGuard helps you do</div>
+          <h2>Manage. Monitor. Measure. Detect. Predict. Decide.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card"><h3>Manage</h3><p>Products, prices, sales and stock.</p></div>
+          <div class="card"><h3>Monitor</h3><p>Keep an eye on your business even when you're away.</p></div>
+          <div class="card"><h3>Measure</h3><p>Understand sales, stock and profit.</p></div>
+          <div class="card"><h3>Detect</h3><p>Identify unusual changes, low stock and slow-moving products.</p></div>
+          <div class="card"><h3>Predict</h3><p>Forecast sales and demand using your business data.</p></div>
+          <div class="card"><h3>Decide</h3><p>Get smart recommendations based on what's happening.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="get-started" class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Ready to see your business differently?</h2>
+          <p>Track your business. Monitor it from anywhere. Understand your data. Get smarter insights.</p>
+          <div class="actions" style="justify-content:center;margin-bottom:0">
+            <a class="btn btn-primary" href="https://hustleguardapp.jreedtechgroup.co.ke">Get Started →</a>
+            <a class="btn btn-ghost" href="mailto:smarthubteam154@gmail.com?subject=HustleGuard%20Enquiry">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>
+        <div class="footer-brand">HustleGuard</div>
+        <div>Shop Intelligence. From Anywhere.</div>
+      </div>
+      <div style="text-align:right">
+        <div>A product of JReed Tech Group · Built for Kenyan businesses</div>
+        <div style="margin-top:8px;display:flex;gap:16px;justify-content:flex-end;flex-wrap:wrap">
+          <a href="tel:0118180097">📞 0118180097</a>
+          <a href="mailto:smarthubteam154@gmail.com">✉ smarthubteam154@gmail.com</a>
+          <a href="https://www.linkedin.com/company/jreed-tech-group/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
